@@ -1,0 +1,8 @@
+.favorites{
+    margin-top: 20%;
+}
+/* I had to margin the FAVORITES button low because you cant see it with the nav bar in the way */
+
+.hide {
+    display:none;
+}
