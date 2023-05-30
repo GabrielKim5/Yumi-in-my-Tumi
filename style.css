@@ -4,6 +4,9 @@ font-family: 'Roboto Condensed', sans-serif;
 }
 /* i added the font style to all the properties. Give us an idea what it looks like in real time. */
 
+html{
+    background-color: grey;
+};
 .favorites{
     margin-top: 20%;
 }
@@ -11,8 +14,4 @@ font-family: 'Roboto Condensed', sans-serif;
 
 .hide {
     display:none;
-}
-
-.className{
-    position: relative;
 }
