@@ -125,7 +125,7 @@ async function getTheData(input) {
     resultDiv.innerHTML = "";
   }
   searchRecipe();
-=======
+
 //Variables and buttons to start the functions
 const body = document.querySelector("body");
 console.dir(body);
