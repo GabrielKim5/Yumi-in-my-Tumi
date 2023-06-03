@@ -1,46 +1,45 @@
 let allergy = "";
 
-
 async function getTheData(input) {
-  try {
-    const appId = "192c1847";
-    const appKey = "0fbedc45644d7fab8f90e3cec73f5625";
+	try {
+		const appId = "192c1847";
+		const appKey = "0fbedc45644d7fab8f90e3cec73f5625";
 
-    const response = await fetch(
-      `https://api.edamam.com/search?q=${input}&app_id=${appId}&app_key=${appKey}&from=0&to=25&excluded=${allergy}&mealType=dinner&mealType=breakfastmealType=lunch`
-    );
-    clearResults();
-    const data = await response.json();
-    const arrayOfData = data.hits;
+		const response = await fetch(
+			`https://api.edamam.com/search?q=${input}&app_id=${appId}&app_key=${appKey}&from=0&to=25&excluded=${allergy}&mealType=dinner&mealType=breakfastmealType=lunch`
+		);
+		clearResults();
+		const data = await response.json();
+		const arrayOfData = data.hits;
 
-    arrayOfData.forEach((foodInfo, index) => {
-      let recipeCalories = Math.round(
-        Math.round(foodInfo.recipe.calories) / foodInfo.recipe.yield
-      );
+		arrayOfData.forEach((foodInfo, index) => {
+			let recipeCalories = Math.round(
+				Math.round(foodInfo.recipe.calories) / foodInfo.recipe.yield
+			);
 
-      // console.log(foodInfo.recipe);
-      let recipeUri = foodInfo.recipe.uri;
-      // let recipeUrl = foodInfo.recipe.url;
-      // // console.log(recipeUri.split("#").slice(1));
-      // let recipeId = recipeUri.split("#").splice(1);
-      // // console.log(recipeId);
-      let recipeLabel = foodInfo.recipe.label;
-      let recipeImage = foodInfo.recipe.image;
-      const foodDigest = foodInfo.recipe.digest;
-      const ingredients = foodInfo.recipe.ingredientLines;
+			// console.log(foodInfo.recipe);
+			let recipeUri = foodInfo.recipe.uri;
+			// let recipeUrl = foodInfo.recipe.url;
+			// // console.log(recipeUri.split("#").slice(1));
+			// let recipeId = recipeUri.split("#").splice(1);
+			// // console.log(recipeId);
+			let recipeLabel = foodInfo.recipe.label;
+			let recipeImage = foodInfo.recipe.image;
+			const foodDigest = foodInfo.recipe.digest;
+			const ingredients = foodInfo.recipe.ingredientLines;
 
-      const resultDiv = document.querySelector(".resultdiv");
-      const foodCardsDiv = document.createElement("div");
-      foodCardsDiv.classList.add(`card-container`);
-      const fav = document.querySelector('.fav');
-      let nutrientsLabelsHTML = "";
-      for (let k = 0; k < foodDigest.length; k++) {
-        // console.log(foodDigest[k].label);
-        let nutrientsLabel = foodDigest[k].label;
-        let nutrientsQuantity =
-          Math.round(foodDigest[k].total / foodInfo.recipe.yield) +
-          foodDigest[k].unit;
-        nutrientsLabelsHTML += `<div class="container-fluid text-center">
+			const resultDiv = document.querySelector(".resultdiv");
+			const foodCardsDiv = document.createElement("div");
+			foodCardsDiv.classList.add(`card-container`);
+			const fav = document.querySelector(".fav");
+			let nutrientsLabelsHTML = "";
+			for (let k = 0; k < foodDigest.length; k++) {
+				// console.log(foodDigest[k].label);
+				let nutrientsLabel = foodDigest[k].label;
+				let nutrientsQuantity =
+					Math.round(foodDigest[k].total / foodInfo.recipe.yield) +
+					foodDigest[k].unit;
+				nutrientsLabelsHTML += `<div class="container-fluid text-center">
         <hr>
         <div class="row">
           <div class="col fs-4">
@@ -51,9 +50,9 @@ async function getTheData(input) {
           </div>
         </div>
       </div>`;
-        // console.log(nutrientsLabel);
-      }
-     foodCardsDiv.innerHTML = `
+				// console.log(nutrientsLabel);
+			}
+			foodCardsDiv.innerHTML = `
         <div class="card bg-success-subtle shadow" style="width: 18rem;" id="${recipeUri}">
       <img src="${recipeImage}" class="card-img-top food-image" alt="food name">
       <div class="card-body d-grid">
@@ -98,8 +97,8 @@ async function getTheData(input) {
         <div class="modal-body ">
           <ul>
             ${ingredients
-              .map((ingredient) => `<li class="fs-4">${ingredient}</li>`)
-              .join("")}
+							.map((ingredient) => `<li class="fs-4">${ingredient}</li>`)
+							.join("")}
           </ul>
           <h2>Instructions: </h2>
           <a href="${recipeUri}">Click to watch the Insructions</a>
@@ -111,124 +110,122 @@ async function getTheData(input) {
     </div>
   </div>`;
 
-      resultDiv.append(foodCardsDiv);
+			resultDiv.append(foodCardsDiv);
 
-      let favoriteBtn = document.querySelector(`.favbutton-${index}`);
-     
-      
+			let favoriteBtn = document.querySelector(`.favbutton-${index}`);
 
-      favoriteBtn.addEventListener("click", (e) => {
-        e.preventDefault();
+			favoriteBtn.addEventListener("click", (e) => {
+				e.preventDefault();
 
-        const favorite = getFavorite();
+				const favorite = getFavorite();
 
-        if(favoriteBtn.classList.contains("btn-danger")){
-          favoriteBtn.classList.remove("btn-danger");
-          favoriteBtn.classList.add("btn-primary");
-          favoriteBtn.textContent = "ADDED";
-          // addToFavorite(recipeUri);
-          
-          const newCard = {
-            recipeImage,
-            recipeLabel,
-            recipeCalories,
-            ingredients,
-            nutrientsLabelsHTML
-          };
-          favorite.push(newCard);
-          localStorage.setItem("favorite", JSON.stringify(favorite));
-          displayFavorites();
+				if (favoriteBtn.classList.contains("btn-danger")) {
+					favoriteBtn.classList.remove("btn-danger");
+					favoriteBtn.classList.add("btn-primary");
+					favoriteBtn.textContent = "ADDED";
+					// addToFavorite(recipeUri);
 
-        }else{
-          favoriteBtn.classList.remove("btn-primary");
-          favoriteBtn.classList.add("btn-danger");
-          favoriteBtn.innerHTML =  `Favorites <span>&hearts;</span>`;
-          removeFromFavorite(recipeUri);
-          localStorage.setItem("favorite", JSON.stringify(favorite.filter(item => item.recipeUri !== recipeUri)));
-          displayFavorites();         
-         }
-      })
-      
-      
-    });    
-
-  } catch (error) {
-    console.log(error);
-  } 
-};
-
+					const newCard = {
+						recipeImage,
+						recipeLabel,
+						recipeCalories,
+						ingredients,
+						nutrientsLabelsHTML,
+					};
+					favorite.push(newCard);
+					localStorage.setItem("favorite", JSON.stringify(favorite));
+					displayFavorites();
+				} else {
+					favoriteBtn.classList.remove("btn-primary");
+					favoriteBtn.classList.add("btn-danger");
+					favoriteBtn.innerHTML = `Favorites <span>&hearts;</span>`;
+					removeFromFavorite(recipeUri);
+					localStorage.setItem(
+						"favorite",
+						JSON.stringify(
+							favorite.filter((item) => item.recipeUri !== recipeUri)
+						)
+					);
+					displayFavorites();
+				}
+			});
+		});
+	} catch (error) {
+		console.log(error);
+	}
+}
 
 function searchRecipe() {
-  let searchBox = document.querySelector(".search-input");
-  const searchBtn = document.querySelector("#search-button");
-  searchBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    let input = searchBox.value.trim().toLowerCase();
-    if (searchBtn) {
-      searchBox.value = "";
-    }
-    getTheData(input);
-  });
+	let searchBox = document.querySelector(".search-input");
+	const searchBtn = document.querySelector("#search-button");
+	searchBtn.addEventListener("click", (e) => {
+		e.preventDefault();
+		let input = searchBox.value.trim().toLowerCase();
+		if (searchBtn) {
+			searchBox.value = "";
+		}
+		getTheData(input);
+	});
 }
 
 function clearResults() {
-  const resultDiv = document.querySelector(".resultdiv");
-  resultDiv.innerHTML = "";
+	const resultDiv = document.querySelector(".resultdiv");
+	resultDiv.innerHTML = "";
 }
 
 const homeContainer = document.querySelector(".body-container");
 let filterInput = document.querySelector(".filter-input");
 let filterBtn = document.querySelector(".filter-btn");
 
-
 filterBtn.addEventListener("click", (e) => {
-  e.preventDefault();
+	e.preventDefault();
 
-  allergy = filterInput.value.replaceAll(",","&excluded=");
-  // console.log(allergy);
-  let searchBox = document.querySelector(".search-input");
-  let input = searchBox.value.trim().toLowerCase();
-  getTheData(input);
-  return allergy;
+	allergy = filterInput.value.replaceAll(",", "&excluded=");
+	// console.log(allergy);
+	let searchBox = document.querySelector(".search-input");
+	let input = searchBox.value.trim().toLowerCase();
+	getTheData(input);
+	return allergy;
 });
 
-
-
 // Making an Empty Array List in Local Storage.
-function getFavorite(){
-  const favorite = JSON.parse(localStorage.getItem('favorite'));
-  return favorite === null ? [] : favorite;
-  // the question mark condition ? expression TRUE : expression FALSE ( it's like an IF Statement)
-};
+function getFavorite() {
+	const favorite = JSON.parse(localStorage.getItem("favorite"));
+	return favorite === null ? [] : favorite;
+	// the question mark condition ? expression TRUE : expression FALSE ( it's like an IF Statement)
+}
 
-function addToFavorite(id){
-  const favorite = getFavorite();
-  // getting the recipe item from the array list in local storage.
-  // setItem(keyName, keyValue)
-  localStorage.setItem("favorite", JSON.stringify([...favorite, id]))
-
+function addToFavorite(id) {
+	const favorite = getFavorite();
+	// getting the recipe item from the array list in local storage.
+	// setItem(keyName, keyValue)
+	localStorage.setItem("favorite", JSON.stringify([...favorite, id]));
 }
 
 // addTogetList("Hello");
 
-function removeFromFavorite(id){
-  const favorite = getFavorite();
-  localStorage.setItem('favorite', JSON.stringify(favorite.filter(value => value !== id)) )
+function removeFromFavorite(id) {
+	const favorite = getFavorite();
+	localStorage.setItem(
+		"favorite",
+		JSON.stringify(favorite.filter((value) => value !== id))
+	);
 }
 
-function clearResults(){
-  const resultDiv = document.querySelector(".resultdiv");
-  resultDiv.innerHTML = "";
-  localStorage.removeItem("favorite");
+function clearResults() {
+	const resultDiv = document.querySelector(".resultdiv");
+	resultDiv.innerHTML = "";
+	localStorage.removeItem("favorite");
 
-displayFavorites();
+	displayFavorites();
 }
-
 
 function displayFavorites() {
-  const favorite = getFavorite();
-  const fav = document.querySelector('.fav');
-  const tempStrip = favorite.map((item, index) => `
+	const favorite = getFavorite();
+	const fav = document.querySelector(".fav");
+	const tempStrip = favorite
+		.map(
+			(item, index) => `
     <div class="card bg-success-subtle shadow" style="width: 18rem;" id="${item.recipeUri}">
       <img src="${item.recipeImage}" class="card-img-top food-image" alt="food name">
       <div class="card-body d-grid">
@@ -240,17 +237,11 @@ function displayFavorites() {
       </div>
       <!-- Rest of the card content and modals -->
     </div>
-  `).join("");
+  `
+		)
+		.join("");
 
-  fav.innerHTML = tempStrip;
-  tempStrip.style.display = ""
+	fav.innerHTML = tempStrip;
 }
 
-
-
-
-
-
-
 searchRecipe();
-
