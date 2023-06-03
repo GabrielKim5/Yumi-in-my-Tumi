@@ -1,3 +1,4 @@
+
 async function yumi(query) {
 	try {
 		const response = await fetch(
@@ -26,3 +27,4 @@ function getNutritionalAnalysis() {
 	});
 }
 getNutritionalAnalysis();
+
