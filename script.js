@@ -8,43 +8,43 @@
 // 192c1847
 
 async function getTheData(input) {
-  try {
-    clearResults();
-    const appId = "a4b3829f";
-    const appKey = "330a149b22308c8631a0185a33d77792";
-    const response = await fetch(
-      `https://api.edamam.com/search?q=${input}&app_id=${appId}&app_key=${appKey}`
-    );
-    const data = await response.json();
-    const arrayOfData = data.hits;
-    arrayOfData.forEach((foodInfo, index) => {
-      let recipeCalories = Math.round(
-        Math.round(foodInfo.recipe.calories) / foodInfo.recipe.yield
-      );
-    //   console.log(foodInfo.recipe);
-      let recipeUri = foodInfo.recipe.uri;
-      let recipeUrl = foodInfo.recipe.url;
-      // console.log(recipeUri.split("#").slice(1));
-      let recipeId = recipeUri.split("#").splice(1);
-      // console.log(recipeId);
-      let recipeLabel = foodInfo.recipe.label;
-      let recipeImage = foodInfo.recipe.image;
-      const foodDigest = foodInfo.recipe.digest;
-      const ingredients = foodInfo.recipe.ingredientLines;
-      const resultDiv = document.querySelector(".resultdiv");
-      const foodCardsDiv = document.createElement("div");
-      foodCardsDiv.classList.add(`card-container`);
-      let nutrientsLabelsHTML = "";
-      for (let k = 0; k < foodDigest.length; k++) {
-        // console.log(foodDigest[k].label);
-        let nutrientsLabel = foodDigest[k].label;
-        let nutrientsQuantity =
-          Math.round(foodDigest[k].total) + foodDigest[k].unit;
-        nutrientsLabelsHTML += `<p class="fw-medium">${nutrientsLabel}:- ${nutrientsQuantity}</p>`;
-        // console.log(nutrientsLabel);
-      }
-      foodCardsDiv.innerHTML = `
-        <div class=" m-auto card bg-success-subtle my-5 shadow" style="width: 18rem;" id="${recipeId}">
+	try {
+		clearResults();
+		const appId = "a4b3829f";
+		const appKey = "330a149b22308c8631a0185a33d77792";
+		const response = await fetch(
+			`https://api.edamam.com/search?q=${input}&app_id=${appId}&app_key=${appKey}`
+		);
+		const data = await response.json();
+		const arrayOfData = data.hits;
+		arrayOfData.forEach((foodInfo, index) => {
+			let recipeCalories = Math.round(
+				Math.round(foodInfo.recipe.calories) / foodInfo.recipe.yield
+			);
+			// console.log(foodInfo.recipe);
+			let recipeUri = foodInfo.recipe.uri;
+			let recipeUrl = foodInfo.recipe.url;
+			// console.log(recipeUri.split("#").slice(1));
+			let recipeId = recipeUri.split("#").splice(1);
+			// console.log(recipeId);
+			let recipeLabel = foodInfo.recipe.label;
+			let recipeImage = foodInfo.recipe.image;
+			const foodDigest = foodInfo.recipe.digest;
+			const ingredients = foodInfo.recipe.ingredientLines;
+			const resultDiv = document.querySelector(".resultdiv");
+			const foodCardsDiv = document.createElement("div");
+			foodCardsDiv.classList.add(`card-container`);
+			let nutrientsLabelsHTML = "";
+			for (let k = 0; k < foodDigest.length; k++) {
+				// console.log(foodDigest[k].label);
+				let nutrientsLabel = foodDigest[k].label;
+				let nutrientsQuantity =
+					Math.round(foodDigest[k].total) + foodDigest[k].unit;
+				nutrientsLabelsHTML += `<p class="fw-medium">${nutrientsLabel}:- ${nutrientsQuantity}</p>`;
+				// console.log(nutrientsLabel);
+			}
+			foodCardsDiv.innerHTML = `
+        <div class="card bg-success-subtle my-2 shadow" style="width: 18rem;" id="${recipeId}">
       <img src="${recipeImage}" class="card-img-top food-image" alt="food name">
       <div class="card-body d-grid">
         <h2 class="card-title text-center">${recipeLabel}</h2>
@@ -91,8 +91,8 @@ async function getTheData(input) {
           <h3>${recipeLabel} Ingredients</h3>
           <ul>
             ${ingredients
-              .map((ingredient) => `<li class="fs-3">${ingredient}</li>`)
-              .join("")}
+							.map((ingredient) => `<li class="fs-3">${ingredient}</li>`)
+							.join("")}
           </ul>
           <h2>Instructions: </h2>
           <a href="${recipeUrl}">Click to watch the Insructions</a>
@@ -103,50 +103,27 @@ async function getTheData(input) {
       </div>
     </div>
   </div>`;
-      resultDiv.append(foodCardsDiv);
-    });
-  } catch (error) {
-    console.log(error);
-  }
+			resultDiv.append(foodCardsDiv);
+		});
+	} catch (error) {
+		console.log(error);
+	}
 }
 function searchRecipe() {
-  let searchBox = document.querySelector(".search-input");
-  const searchBtn = document.querySelector("#search-button");
-  searchBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    let input = searchBox.value;
-    // console.log(input);
-    getTheData(input);
-    if (searchBtn) {
-      searchBox.value = "";
-    }
-  });
+	let searchBox = document.querySelector(".search-input");
+	const searchBtn = document.querySelector("#search-button");
+	searchBtn.addEventListener("click", (e) => {
+		e.preventDefault();
+		let input = searchBox.value;
+		// console.log(input);
+		getTheData(input);
+		if (searchBtn) {
+			// searchBox.value = '';
+		}
+	});
 }
 function clearResults() {
-  const resultDiv = document.querySelector(".resultdiv");
-  resultDiv.innerHTML = "";
+	const resultDiv = document.querySelector(".resultdiv");
+	resultDiv.innerHTML = "";
 }
 searchRecipe();
-
-// async function excludeThisFromMyMouth() {
-//   const appId = "a4b3829f";
-//     const appKey = "330a149b22308c8631a0185a33d77792";
-
-//     const response = await fetch(
-//       `https://api.edamam.com/search?q=beef&app_id=${appId}&app_key=${appKey}`
-//     );
-//     const theData = await response.json();
-//     // console.log(theData.hits);
-//     const recipeData = theData.hits;
-
-//     recipeData.forEach(foodInfo => {
-//       // console.log(foodInfo.recipe.cautions);
-//       let myFoodCautions = foodInfo.recipe.cautions;
-//       const allergies = myFoodCautions.map((allergy) => allergy.toLowerCase());
-//       console.log(allergies);
-//       console.log(myFoodCautions.join(",").toLowerCase());
-
-//       let excluseFood = myFoodCautions.filter((food) =>(food != "g"));
-//       console.log(excluseFood);
-
-// })
