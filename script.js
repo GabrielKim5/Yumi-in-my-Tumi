@@ -12,10 +12,12 @@ async function getTheData(input) {
 		const data = await response.json();
 		const arrayOfData = data.hits;
 
+
 		arrayOfData.forEach((foodInfo, index) => {
 			let recipeCalories = Math.round(
 				Math.round(foodInfo.recipe.calories) / foodInfo.recipe.yield
 			);
+
 
 			// console.log(foodInfo.recipe);
 			let recipeUri = foodInfo.recipe.uri;
@@ -23,20 +25,24 @@ async function getTheData(input) {
 			// // console.log(recipeUri.split("#").slice(1));
 			// let recipeId = recipeUri.split("#").splice(1);
 			// // console.log(recipeId);
+
 			let recipeLabel = foodInfo.recipe.label;
 			let recipeImage = foodInfo.recipe.image;
 			const foodDigest = foodInfo.recipe.digest;
 			const ingredients = foodInfo.recipe.ingredientLines;
 
+
 			const resultDiv = document.querySelector(".resultdiv");
 			const foodCardsDiv = document.createElement("div");
 			foodCardsDiv.classList.add(`card-container`);
 			const fav = document.querySelector(".fav");
+
 			let nutrientsLabelsHTML = "";
 			for (let k = 0; k < foodDigest.length; k++) {
 				// console.log(foodDigest[k].label);
 				let nutrientsLabel = foodDigest[k].label;
 				let nutrientsQuantity =
+
 					Math.round(foodDigest[k].total / foodInfo.recipe.yield) +
 					foodDigest[k].unit;
 				nutrientsLabelsHTML += `<div class="container-fluid text-center">
@@ -54,6 +60,7 @@ async function getTheData(input) {
 			}
 			foodCardsDiv.innerHTML = `
         <div class="card bg-success-subtle shadow" style="width: 18rem;" id="${recipeUri}">
+
       <img src="${recipeImage}" class="card-img-top food-image" alt="food name">
       <div class="card-body d-grid">
         <h2 class="card-title text-center fw-bold">${recipeLabel}</h2>
@@ -97,7 +104,9 @@ async function getTheData(input) {
         <div class="modal-body ">
           <ul>
             ${ingredients
+
 							.map((ingredient) => `<li class="fs-4">${ingredient}</li>`)
+
 							.join("")}
           </ul>
           <h2>Instructions: </h2>
@@ -109,6 +118,7 @@ async function getTheData(input) {
       </div>
     </div>
   </div>`;
+
 
 			resultDiv.append(foodCardsDiv);
 
@@ -149,6 +159,7 @@ async function getTheData(input) {
 					displayFavorites();
 				}
 			});
+
 		});
 	} catch (error) {
 		console.log(error);
@@ -160,6 +171,7 @@ function searchRecipe() {
 	const searchBtn = document.querySelector("#search-button");
 	searchBtn.addEventListener("click", (e) => {
 		e.preventDefault();
+
 		let input = searchBox.value.trim().toLowerCase();
 		if (searchBtn) {
 			searchBox.value = "";
@@ -172,6 +184,7 @@ function clearResults() {
 	const resultDiv = document.querySelector(".resultdiv");
 	resultDiv.innerHTML = "";
 }
+
 
 const homeContainer = document.querySelector(".body-container");
 let filterInput = document.querySelector(".filter-input");
