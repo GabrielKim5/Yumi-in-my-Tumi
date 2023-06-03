@@ -1,6 +1,7 @@
 *{
     font-family: 'Poppins', sans-serif;
 font-family: 'Roboto Condensed', sans-serif;
+/* cursor: url('/image/cursor.cur'),auto; */
 }
 /* i added the font style to all the properties. Give us an idea what it looks like in real time. */
 
@@ -13,3 +14,15 @@ font-family: 'Roboto Condensed', sans-serif;
 .hide {
     display:none;
 }
+
+body{
+    height: 100%;
+}
+
+
+.pizza, button, input, a:hover{
+    cursor: url('/image/cursor.cur'),auto !important;
+}
+
+
+
