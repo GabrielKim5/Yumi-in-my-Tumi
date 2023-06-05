@@ -12,12 +12,10 @@ async function getTheData(input) {
 		const data = await response.json();
 		const arrayOfData = data.hits;
 
-
 		arrayOfData.forEach((foodInfo, index) => {
 			let recipeCalories = Math.round(
 				Math.round(foodInfo.recipe.calories) / foodInfo.recipe.yield
 			);
-
 
 			// console.log(foodInfo.recipe);
 			let recipeUri = foodInfo.recipe.uri;
@@ -31,7 +29,6 @@ async function getTheData(input) {
 			const foodDigest = foodInfo.recipe.digest;
 			const ingredients = foodInfo.recipe.ingredientLines;
 
-
 			const resultDiv = document.querySelector(".resultdiv");
 			const foodCardsDiv = document.createElement("div");
 			foodCardsDiv.classList.add(`card-container`);
@@ -42,7 +39,6 @@ async function getTheData(input) {
 				// console.log(foodDigest[k].label);
 				let nutrientsLabel = foodDigest[k].label;
 				let nutrientsQuantity =
-
 					Math.round(foodDigest[k].total / foodInfo.recipe.yield) +
 					foodDigest[k].unit;
 				nutrientsLabelsHTML += `<div class="container-fluid text-center">
@@ -58,6 +54,7 @@ async function getTheData(input) {
       </div>`;
 				// console.log(nutrientsLabel);
 			}
+      
 			foodCardsDiv.innerHTML = `
         <div class="card bg-success-subtle shadow" style="width: 18rem;" id="${recipeUri}">
 
@@ -119,7 +116,6 @@ async function getTheData(input) {
     </div>
   </div>`;
 
-
 			resultDiv.append(foodCardsDiv);
 
 			let favoriteBtn = document.querySelector(`.favbutton-${index}`);
@@ -159,7 +155,6 @@ async function getTheData(input) {
 					displayFavorites();
 				}
 			});
-
 		});
 	} catch (error) {
 		console.log(error);
@@ -184,7 +179,6 @@ function clearResults() {
 	const resultDiv = document.querySelector(".resultdiv");
 	resultDiv.innerHTML = "";
 }
-
 
 const homeContainer = document.querySelector(".body-container");
 let filterInput = document.querySelector(".filter-input");
