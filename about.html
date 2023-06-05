@@ -12,10 +12,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+
+<script src="https://kit.fontawesome.com/dadd9d2da2.js" crossorigin="anonymous"></script>
 </head>
-  <body class="container bg-warning-subtle">
+  <body class="bg-warning-subtle body-container container-fluid container-sm">
     <!-- Navbar with all the links associated with the Food App -->
-    <nav class="navbar bg-success fixed-top">
+    <nav class="navbar bg-success fixed-top navbarfixed">
       <!-- This is where you can add a class to change the menu color scheme -->
       <div class="container-fluid justify-content-between">
         <img src="/image/newicon3-hs.png" style="max-width:60px" class="thumbnail img-fluid">
@@ -33,16 +35,13 @@
           </div>
           <div class="offcanvas-body bg-warning-subtle">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item text-capitalize text-center border border-dark border-rounded my-3 fw-bold fs-5">
+              <li class="nav-item text-capitalize text-center border border-dark rounded my-3 fw-bold fs-3 text-black-50">
                 <a class="nav-link active" aria-current="page" href="home.html">Home</a>
               </li>
-              <li class="nav-item text-capitalize text-center border border-dark border-rounded my-3 fw-bold fs-5">
-                  <a class="nav-link active" aria-current="page" href="">Favorites</a>
-                </li>
-                <li class="nav-item text-capitalize text-center border border-dark border-rounded my-3 fw-bold fs-5">
+                <li class="nav-item text-capitalize text-center border border-dark rounded my-3 fw-bold fs-3 text-black-50">
                   <a class="nav-link active" aria-current="page" href="analyze.html">Analyze My Ingrdients</a>
                 </li>
-                <li class="nav-item text-capitalize text-center border border-dark border-rounded my-3 fw-bold fs-5">
+                <li class="nav-item text-capitalize text-center border border-dark rounded my-3 fw-bold fs-3 text-black-50">
                   <a class="nav-link active" aria-current="page" href="about.html">About Us</a>
                 </li>
                 <!-- i added some style but it can be changed, i was just testing out the features. -->
@@ -51,35 +50,93 @@
         </div>
       </div>
     </nav>
-    <br>
-   
-    <!-- Welcome Text -->
-    <h1 class="text-center mt-5 fs-1"><strong>WELCOME TO YUMMI</strong></h1>
-    
-    <div class="my-4"><h2 class="text-center mt-2 fs-2 fw-light">--ABOUT US--</h2></div>
-    <section class="about-section">
-      <div class="bg-light">
-        Information about the APP, API and developers... in Progress.
+  </div>
+  <br>
+
+
+    <div class="container-fluid container-sm container-lg container-md">
+        <!-- Welcome Text -->
+        <h1 class="mt-1 text-center mt-5 h1-title d-flex container-sm">About us</h1>
+        <h3 class="slogan">Our Mission</h3>        
+   </div>
+
+
+   <div class="container mt-0" style="width: 700px;">
+    <div id="carouselExampleSlidesOnly" class="carousel slide container-sm" data-bs-ride="carousel">
+      <div class="carousel-inner rounded-3 border-danger">
+        <div class="carousel-item active ">
+          <img src="/image/food3.jpg" class="d-block w-100 img-fluid" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="/image/nutrition2.jpg" class="d-block w-100 img-fluid" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="/image/protien pic.jpg" class="d-block w-100 img-fluid" alt="...">
+        </div>
       </div>
-    </section>
-
+    </div>
     
-<!-- <div class="fav"></div>    -->
-<button class="filter-btn" id="search-button"></button> 
-
-<div id="search-button"></div>
-
-
-
+      
     
+    <div class="row d-flex justify-content-center flex-wrap container-sm container-lg container-md">
+        <div class=" text-wrap text-center fs-5 fw-semibold mt-1">
+         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore maiores accusantium consequatur possimus quaerat repellendus, saepe ipsum odio similique, quas, in quae. Deserunt incidunt corporis accusamus mollitia commodi quisquam ut.</p>
+         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, nesciunt velit sit eius exercitationem veritatis, quisquam veniam accusantium voluptas quas facilis hic. Ipsam laborum iusto perferendis optio eum. Illum, itaque?  
+        </div> 
+    </div>
+    <div class="container-fluid text-center text-uppercase">
+      <button type="button" class="btn btn-danger text-light shadow text-uppercase mb-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+       follow us
+      </button>
+    </div>
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 fw-bolder" id="staticBackdropLabel">Our Social</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body d-flex justify-content-evenly container-fluid">
+            <a href="facebook.com"><i class="fa-brands fa-facebook fs-1"></i></a>
+            <a href="instagram.com"><i class="fa-brands fa-instagram fs-1"></i></a>
+            <a href="twitter.com"><i class="fa-brands fa-twitter fs-1"></i></a>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger text-light shadow text-uppercase mb-3 rounded-pill" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+  
+
+
+   
+
+   
+   
+  
+
+
+
+
+  
+
+
+
+
+
 
 
 
 
 <!-- FOOTER SECTION -->
-  <footer class="bg-success fixed-bottom text-center text-light fw-bold fs-6">&#169; YUMMI 2023 </footer>
+  <footer class="bg-success fixed-bottom text-center text-light fw-bold fs-6 container-fluid position-fixed mt-5">&#169; YUMMI 2023 </footer>
   <!-- FOOTER SECTION -->
   <script src="script.js"></script>
+ 
 </body>
 </html>
 
