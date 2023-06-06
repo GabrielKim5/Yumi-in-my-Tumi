@@ -12,11 +12,11 @@ async function getTheData(input) {
 		const data = await response.json();
 		const arrayOfData = data.hits;
 
+
 		arrayOfData.forEach((foodInfo, index) => {
 			let recipeCalories = Math.round(
 				Math.round(foodInfo.recipe.calories) / foodInfo.recipe.yield
 			);
-
 
 
       // console.log(foodInfo.recipe.dishType)
@@ -28,6 +28,7 @@ async function getTheData(input) {
 			const foodDigest = foodInfo.recipe.digest;
 			const ingredients = foodInfo.recipe.ingredientLines;
 
+
 			const resultDiv = document.querySelector(".resultdiv");
 			const foodCardsDiv = document.createElement("div");
 			foodCardsDiv.classList.add(`card-container`);
@@ -37,6 +38,7 @@ async function getTheData(input) {
 				// console.log(foodDigest[k].label);
 				let nutrientsLabel = foodDigest[k].label;
 				let nutrientsQuantity =
+
 					Math.round(foodDigest[k].total / foodInfo.recipe.yield) +
 					foodDigest[k].unit;
 				nutrientsLabelsHTML += `<div class="container-fluid text-center">
@@ -52,7 +54,6 @@ async function getTheData(input) {
       </div>`;
 				
 			}
-
 			foodCardsDiv.innerHTML = `
 
         <div class="card bg-success-subtle shadow rounded" style="width: 25rem;" id="${recipeUri}">
@@ -131,33 +132,6 @@ async function getTheData(input) {
   }
 }
 
-
-					const newCard = {
-						recipeImage,
-						recipeLabel,
-						recipeCalories,
-						ingredients,
-						nutrientsLabelsHTML,
-					};
-					favorite.push(newCard);
-					localStorage.setItem("favorite", JSON.stringify(favorite));
-					displayFavorites();
-				} else {
-					favoriteBtn.classList.remove("btn-primary");
-					favoriteBtn.classList.add("btn-danger");
-					favoriteBtn.innerHTML = `Favorites <span>&hearts;</span>`;
-					removeFromFavorite(recipeUri);
-					localStorage.setItem(
-						"favorite",
-						JSON.stringify(
-							favorite.filter((item) => item.recipeUri !== recipeUri)
-						)
-					);
-					displayFavorites();
-				}
-			});
-		});
-
 let filterInput = document.querySelector(".filter-input");
 let filterBtn = document.querySelector(".filter-btn");
 
@@ -165,7 +139,6 @@ async function getRecipe() {
 	try {
 		const searchInput = document.querySelector(".search-input").value;
     		await getTheData(searchInput);
-
 	} catch (error) {
 		console.log("Error:", error);
 	}
@@ -176,10 +149,6 @@ function clearResults() {
 	const resultDiv = document.querySelector(".resultdiv");
 	resultDiv.innerHTML = "";
 }
-
-const homeContainer = document.querySelector(".body-container");
-let filterInput = document.querySelector(".filter-input");
-let filterBtn = document.querySelector(".filter-btn");
 
 
 function searchRecipe() {
