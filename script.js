@@ -12,28 +12,33 @@ async function getTheData(input) {
 		const data = await response.json();
 		const arrayOfData = data.hits;
 
+
 		arrayOfData.forEach((foodInfo, index) => {
 			let recipeCalories = Math.round(
 				Math.round(foodInfo.recipe.calories) / foodInfo.recipe.yield
 			);
 
+
       // console.log(foodInfo.recipe.dishType)
       let dishType = foodInfo.recipe.dishType;
 			let recipeUri = foodInfo.recipe.uri;
+
 			let recipeLabel = foodInfo.recipe.label;
 			let recipeImage = foodInfo.recipe.image;
 			const foodDigest = foodInfo.recipe.digest;
 			const ingredients = foodInfo.recipe.ingredientLines;
 
+
 			const resultDiv = document.querySelector(".resultdiv");
 			const foodCardsDiv = document.createElement("div");
 			foodCardsDiv.classList.add(`card-container`);
-		
+
 			let nutrientsLabelsHTML = "";
 			for (let k = 0; k < foodDigest.length; k++) {
 				// console.log(foodDigest[k].label);
 				let nutrientsLabel = foodDigest[k].label;
 				let nutrientsQuantity =
+
 					Math.round(foodDigest[k].total / foodInfo.recipe.yield) +
 					foodDigest[k].unit;
 				nutrientsLabelsHTML += `<div class="container-fluid text-center">
@@ -50,8 +55,10 @@ async function getTheData(input) {
 				
 			}
 			foodCardsDiv.innerHTML = `
+
         <div class="card bg-success-subtle shadow rounded" style="width: 25rem;" id="${recipeUri}">
       <img src="${recipeImage}" class="card-img-top food-image" alt="food name container-fluid">
+
       <div class="card-body d-grid">
         <h2 class="card-title text-center fw-bold fs-2 text-uppercase h2 my-0">${recipeLabel}</h2>
         <h5 class="card-text text-center fs-3 my-0 fw-bold text-light">--${recipeCalories} kcal /plate--</h5>
@@ -94,7 +101,9 @@ async function getTheData(input) {
         <div class="modal-body ">
           <ul>
             ${ingredients
+
 							.map((ingredient) => `<li class="fs-4">${ingredient}</li>`)
+
 							.join("")}
           </ul>
           <h2>Instructions: </h2>
@@ -106,6 +115,7 @@ async function getTheData(input) {
       </div>
     </div>
   </div>`;
+
 			resultDiv.append(foodCardsDiv);
 
       const searchInput = document.querySelector(".search-input").value
@@ -132,6 +142,7 @@ async function getRecipe() {
 	} catch (error) {
 		console.log("Error:", error);
 	}
+
 }
 
 function clearResults() {
@@ -139,11 +150,13 @@ function clearResults() {
 	resultDiv.innerHTML = "";
 }
 
+
 function searchRecipe() {
   	getRecipe();
 }
 
 document.querySelector("#search-button").addEventListener("click", searchRecipe);
+
 
 filterBtn.addEventListener("click", (e) => {
 	e.preventDefault();
@@ -152,9 +165,5 @@ filterBtn.addEventListener("click", (e) => {
 });
 
 searchRecipe();
-
-
-
-	
 
 
