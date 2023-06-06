@@ -54,7 +54,7 @@ async function getTheData(input) {
       </div>`;
 				// console.log(nutrientsLabel);
 			}
-      
+
 			foodCardsDiv.innerHTML = `
         <div class="card bg-success-subtle shadow" style="width: 18rem;" id="${recipeUri}">
 
