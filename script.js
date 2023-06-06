@@ -2,11 +2,11 @@ let allergy = "";
 
 async function getTheData(input) {
 	try {
-		const appId = "192c1847";
-		const appKey = "0fbedc45644d7fab8f90e3cec73f5625";
+		const appId = "a4b3829f";
+		const appKey = "330a149b22308c8631a0185a33d77792";
 
 		const response = await fetch(
-			`https://api.edamam.com/search?q=${input}&app_id=${appId}&app_key=${appKey}&from=0&to=25&excluded=${allergy}&mealType=dinner&mealType=breakfastmealType=lunch`
+			`https://api.edamam.com/search?q=${input}&app_id=${appId}&app_key=${appKey}&from=0&to=25&excluded=${allergy}&mealType=dinner&mealType=breakfast&mealType=lunch`
 		);
 		clearResults();
 		const data = await response.json();
@@ -17,12 +17,11 @@ async function getTheData(input) {
 				Math.round(foodInfo.recipe.calories) / foodInfo.recipe.yield
 			);
 
-			// console.log(foodInfo.recipe);
+
+
+      // console.log(foodInfo.recipe.dishType)
+      let dishType = foodInfo.recipe.dishType;
 			let recipeUri = foodInfo.recipe.uri;
-			// let recipeUrl = foodInfo.recipe.url;
-			// // console.log(recipeUri.split("#").slice(1));
-			// let recipeId = recipeUri.split("#").splice(1);
-			// // console.log(recipeId);
 
 			let recipeLabel = foodInfo.recipe.label;
 			let recipeImage = foodInfo.recipe.image;
@@ -32,7 +31,6 @@ async function getTheData(input) {
 			const resultDiv = document.querySelector(".resultdiv");
 			const foodCardsDiv = document.createElement("div");
 			foodCardsDiv.classList.add(`card-container`);
-			const fav = document.querySelector(".fav");
 
 			let nutrientsLabelsHTML = "";
 			for (let k = 0; k < foodDigest.length; k++) {
@@ -52,41 +50,42 @@ async function getTheData(input) {
           </div>
         </div>
       </div>`;
-				// console.log(nutrientsLabel);
+				
 			}
 
 			foodCardsDiv.innerHTML = `
-        <div class="card bg-success-subtle shadow" style="width: 18rem;" id="${recipeUri}">
 
-      <img src="${recipeImage}" class="card-img-top food-image" alt="food name">
+        <div class="card bg-success-subtle shadow rounded" style="width: 25rem;" id="${recipeUri}">
+      <img src="${recipeImage}" class="card-img-top food-image" alt="food name container-fluid">
+
       <div class="card-body d-grid">
-        <h2 class="card-title text-center fw-bold">${recipeLabel}</h2>
-        <h5 class="card-text text-center">--${recipeCalories} kcal /plate--</h5>
+        <h2 class="card-title text-center fw-bold fs-2 text-uppercase h2 my-0">${recipeLabel}</h2>
+        <h5 class="card-text text-center fs-3 my-0 fw-bold text-light">--${recipeCalories} kcal /plate--</h5>
       </div>
-      <div class="gap-2 d-flex justify-content-center card-buttons">
-        <button type="button" class="btn btn-danger shadow btn-lg w-75 favbutton-${index}" >Favorites &hearts;</button>
+      <div class="p-3 border border-warning border-start-0 rounded-end text-center bg-warning h2 text-bg-warning fw-bold fs-3 text-uppercase my-0 dishtype">
+        -->${dishType}<--
         </div>
-      <div class="d-flex justify-content-evenly gap-4 my-4">
-        <button type="button" class="btn bg-success text-light shadow" data-bs-toggle="modal" data-bs-target="#modal-${index}">
+      <div class="d-flex justify-content-evenly gap-4  x-card-body">
+        <button type="button" class="btn text-bg-primary bg-danger fw-bold fs-5 rounded-pill shadow my-3" data-bs-toggle="modal" data-bs-target="#modal-${index}" style=width:12rem height: 15rem>
     Total Nutrients
   </button>
-  <button type="button" class="btn btn bg-success text-light shadow" data-bs-toggle="modal" data-bs-target="#ingredients-modal-${index}">
+  <button type="button" class="btn text-bg-primary bg-danger fw-bold fs-5 rounded-pill shadow my-3" data-bs-toggle="modal" data-bs-target="#ingredients-modal-${index}">
                 Ingredients
               </button>
   </div>
   <div class="modal fade" id="modal-${index}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal-${index}-label" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
-      <div class="modal-header bg-warning-subtle">
-        <h1 class="modal-title fs-3 fw-bold" id="modal-${index}-label">${recipeLabel} Nutrients</h1>
+      <div class="modal-header">
+        <h1 class="modal-title fs-3 fw-bolder" id="modal-${index}-label">${recipeLabel} Nutrients</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
           ${nutrientsLabelsHTML}
         <hr>
       </div>
-      <div class="modal-footer bg-warning-subtle">
-        <button type="button" class="btn bg-success text-light" data-bs-dismiss="modal">Close</button>
+      <div class="modal-footer myfooter">
+        <button type="button" class="btn text-bg-primary bg-danger fw-bold fs-5 rounded-pill shadow my-3" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
     </div>
@@ -94,7 +93,7 @@ async function getTheData(input) {
     <div class="modal fade " id="ingredients-modal-${index}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ingredients-modal-${index}-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
-        <div class="modal-header bg-warning-subtle">
+        <div class="modal-header">
           <h1 class="modal-title fs-3 fw-bold" id="ingredients-modal-${index}-label">${recipeLabel} Ingredients</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -109,8 +108,8 @@ async function getTheData(input) {
           <h2>Instructions: </h2>
           <a href="${recipeUri}">Click to watch the Insructions</a>
         </div>
-        <div class="modal-footer bg-warning-subtle">
-          <button type="button" class="btn bg-success text-light" data-bs-dismiss="modal">Close</button>
+        <div class="modal-footer">
+          <button type="button" class="btn text-bg-primary bg-danger fw-bold fs-5 rounded-pill shadow my-3" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -118,18 +117,20 @@ async function getTheData(input) {
 
 			resultDiv.append(foodCardsDiv);
 
-			let favoriteBtn = document.querySelector(`.favbutton-${index}`);
+      const searchInput = document.querySelector(".search-input").value
+  if(searchInput==""){
+    resultDiv.innerHTML = "";
+  }
 
-			favoriteBtn.addEventListener("click", (e) => {
-				e.preventDefault();
 
-				const favorite = getFavorite();
+	
+  
+    });
+  }catch(error){
+    console.log("Error:", error)
+  }
+}
 
-				if (favoriteBtn.classList.contains("btn-danger")) {
-					favoriteBtn.classList.remove("btn-danger");
-					favoriteBtn.classList.add("btn-primary");
-					favoriteBtn.textContent = "ADDED";
-					// addToFavorite(recipeUri);
 
 					const newCard = {
 						recipeImage,
@@ -156,23 +157,19 @@ async function getTheData(input) {
 				}
 			});
 		});
+
+let filterInput = document.querySelector(".filter-input");
+let filterBtn = document.querySelector(".filter-btn");
+
+async function getRecipe() {
+	try {
+		const searchInput = document.querySelector(".search-input").value;
+    		await getTheData(searchInput);
+
 	} catch (error) {
-		console.log(error);
+		console.log("Error:", error);
 	}
-}
 
-function searchRecipe() {
-	let searchBox = document.querySelector(".search-input");
-	const searchBtn = document.querySelector("#search-button");
-	searchBtn.addEventListener("click", (e) => {
-		e.preventDefault();
-
-		let input = searchBox.value.trim().toLowerCase();
-		if (searchBtn) {
-			searchBox.value = "";
-		}
-		getTheData(input);
-	});
 }
 
 function clearResults() {
@@ -184,71 +181,20 @@ const homeContainer = document.querySelector(".body-container");
 let filterInput = document.querySelector(".filter-input");
 let filterBtn = document.querySelector(".filter-btn");
 
+
+function searchRecipe() {
+  	getRecipe();
+}
+
+document.querySelector("#search-button").addEventListener("click", searchRecipe);
+
+
 filterBtn.addEventListener("click", (e) => {
 	e.preventDefault();
-
 	allergy = filterInput.value.replaceAll(",", "&excluded=");
-	// console.log(allergy);
-	let searchBox = document.querySelector(".search-input");
-	let input = searchBox.value.trim().toLowerCase();
-	getTheData(input);
-	return allergy;
+	getRecipe();
 });
 
-// Making an Empty Array List in Local Storage.
-function getFavorite() {
-	const favorite = JSON.parse(localStorage.getItem("favorite"));
-	return favorite === null ? [] : favorite;
-	// the question mark condition ? expression TRUE : expression FALSE ( it's like an IF Statement)
-}
-
-function addToFavorite(id) {
-	const favorite = getFavorite();
-	// getting the recipe item from the array list in local storage.
-	// setItem(keyName, keyValue)
-	localStorage.setItem("favorite", JSON.stringify([...favorite, id]));
-}
-
-// addTogetList("Hello");
-
-function removeFromFavorite(id) {
-	const favorite = getFavorite();
-	localStorage.setItem(
-		"favorite",
-		JSON.stringify(favorite.filter((value) => value !== id))
-	);
-}
-
-function clearResults() {
-	const resultDiv = document.querySelector(".resultdiv");
-	resultDiv.innerHTML = "";
-	localStorage.removeItem("favorite");
-
-	displayFavorites();
-}
-
-function displayFavorites() {
-	const favorite = getFavorite();
-	const fav = document.querySelector(".fav");
-	const tempStrip = favorite
-		.map(
-			(item, index) => `
-    <div class="card bg-success-subtle shadow" style="width: 18rem;" id="${item.recipeUri}">
-      <img src="${item.recipeImage}" class="card-img-top food-image" alt="food name">
-      <div class="card-body d-grid">
-        <h2 class="card-title text-center fw-bold">${item.recipeLabel}</h2>
-        <h5 class="card-text text-center">--${item.recipeCalories} kcal /plate--</h5>
-      </div>
-      <div class="gap-2 d-flex justify-content-center card-buttons">
-        <button type="button" class="btn btn-primary shadow btn-lg w-75 favbutton-${index}" >ADDED</button>
-      </div>
-      <!-- Rest of the card content and modals -->
-    </div>
-  `
-		)
-		.join("");
-
-	fav.innerHTML = tempStrip;
-}
-
 searchRecipe();
+
+
