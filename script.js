@@ -6,7 +6,7 @@ async function getTheData(input) {
 		const appKey = "330a149b22308c8631a0185a33d77792";
 
 		const response = await fetch(
-			`https://api.edamam.com/search?q=${input}&app_id=${appId}&app_key=${appKey}&from=0&to=25&excluded=${allergy}&mealType=dinner&mealType=breakfast&mealType=lunch`
+			`https://api.edamam.com/search?q=${input}&app_id=${appId}&app_key=${appKey}&from=0&to=27&excluded=${allergy}&mealType=dinner&mealType=breakfast&mealType=lunch`
 		);
 		clearResults();
 		const data = await response.json();
@@ -160,7 +160,7 @@ document.querySelector("#search-button").addEventListener("click", searchRecipe)
 
 filterBtn.addEventListener("click", (e) => {
 	e.preventDefault();
-	allergy = filterInput.value.replaceAll(",", "&excluded=");
+	allergy = filterInput.value.replaceAll(",", "&excluded=").toLowerCase().trim();
 	getRecipe();
 });
 
