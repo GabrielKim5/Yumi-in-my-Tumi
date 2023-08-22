@@ -19,6 +19,7 @@
 			defer
 		></script>
 		<!-- The script is above since i use a "defer" function to make it work above. It doesn't change anything -->
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -27,17 +28,14 @@
 		/>
 	</head>
 
-	<body class="container bg-warning-subtle">
+	<body class="container">
 		<!-- Navbar with all the links associated with the Food App -->
 		<nav class="navbar bg-success fixed-top">
 			<!-- This is where you can add a class to change the menu color scheme -->
-			<div class="container-fluid justify-content-between">
-				<img
-					src="/image/newicon3-hs.png"
-					style="max-width: 60px"
-					class="thumbnail img-fluid"
-				/>
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">*LOGO*</a>
 				<!-- this is where the logo will be placed -->
+
 				<button
 					class="navbar-toggler bg-light"
 					type="button"
@@ -57,13 +55,15 @@
 				>
 					<div class="offcanvas-header bg-warning-subtle">
 						<!-- color scheme div -->
+
 						<h5
-							class="offcanvas-title text-dark fs-1 fw-bolder"
+							class="offcanvas-title text-dark fs-1"
 							id="offcanvasDarkNavbarLabel"
 						>
 							MENU
 						</h5>
 						<!-- color scheme for the MENU title -->
+
 						<button
 							type="button"
 							class="btn-close btn-close"
@@ -74,15 +74,26 @@
 					<div class="offcanvas-body bg-warning-subtle">
 						<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 							<li
-								class="nav-item text-capitalize text-center border border-dark border-rounded my-3 fw-bold fs-5"
+								class="nav-item text-capitalize text-center border border-dark border-rounded my-3"
 							>
-								<a class="nav-link active" aria-current="page" href="home.html"
+								<a class="nav-link active" aria-current="page" href="index.html"
 									>Home</a
 								>
 							</li>
 
 							<li
-								class="nav-item text-capitalize text-center border border-dark border-rounded my-3 fw-bold fs-5"
+								class="nav-item text-capitalize text-center border border-dark border-rounded my-3"
+							>
+								<a
+									class="nav-link active"
+									aria-current="page"
+									href="favorites.html"
+									>Favorites</a
+								>
+							</li>
+
+							<li
+								class="nav-item text-capitalize text-center border border-dark border-rounded my-3"
 							>
 								<a
 									class="nav-link active"
@@ -91,8 +102,20 @@
 									>Analyze My Ingrdients</a
 								>
 							</li>
+
 							<li
-								class="nav-item text-capitalize text-center border border-dark border-rounded my-3 fw-bold fs-5"
+								class="nav-item text-capitalize text-center border border-dark border-rounded my-3"
+							>
+								<a
+									class="nav-link active"
+									aria-current="page"
+									href="recipeList.html"
+									>Recipe List</a
+								>
+							</li>
+
+							<li
+								class="nav-item text-capitalize text-center border border-dark border-rounded my-3"
 							>
 								<a class="nav-link active" aria-current="page" href="about.html"
 									>About Us</a
@@ -104,73 +127,30 @@
 				</div>
 			</div>
 		</nav>
+
+		<br />
+		<br />
+		<br />
 		<br />
 		<!-- Welcome Text -->
-		<!-- <h1 class="text-center mt-5 fs-1"><strong>WELCOME TO YUMMI</strong></h1> -->
-
-		<div class="my-4">
-			<h2 class="text-center mt-2 fs-2 fw-light"></h2>
-		</div>
-		
-<br>
-
-<!-- <h1 class="text-center"><strong>ANALYZING INGREDIENTS</strong></h1> -->
-
-
-<div class="container-fluid container-sm container-lg mt-1">
-	<!-- Welcome Text -->
-<h1 class="text-center mt-5 h1-title d-flex container-sm ">WELCOME TO  YUMMI</h1>
-<h3 class="slogan">--Make what your heart desire--</h3>
-<!-- Brief description of nav-bar -->
-<p class="fs-4 mt-5 text-light-500 text-center text-lg fw-bolder">Type in below your ingregients :</p>
-<br>
-<!-- RECIPE API Search Bar -->
-		<!--added in the WELCOME TEXT -->
-		<!-- Welcome Text -->
+		<h1 class="text-center"><strong>WELCOME TO THE APP</strong></h1>
+		<br />
 
 		<!-- Brief description of nav-bar -->
-		<!-- <h2 class="text-center">Type out the recipe you'd like to search below!</h2>
-		<br /> -->
+		<h2 class="text-center">Type out the recipe you'd like to search below!</h2>
+		<br />
 
 		<!-- RECIPE API Search Bar -->
-		<!-- Filter / Drop down menu -->
+
 		<div class="input-group mb-3">
-			<!-- SEARCH TEXT INPUT FIELD -->
-			<!-- 11111111111 -->
 			<input
 				type="text"
-				class="form-control search-bar"
+				class="form-control search-input"
 				aria-label="Text input with dropdown button"
-				id="search-bar"
-				placeholder="IE: 1 cup milk"
+				placeholder="IE: Pasta, bread..."
 			/>
-
-			<!-- SEARCH BUTTON -->
-			<button
-				class="btn btn-success input-group-btn"
-				id="searchBtn"
-				type="submit"
-			>
-				Search
-			</button>
 		</div>
 
-
-		<!-- FOOTER SECTION -->
-		<footer class="bg-success fixed-bottom text-center text-light fw-bold fs-6">
-			YUMMI 2023
-		</footer>
-		<script src="nutritionalAnalysis.js"></script>
+		<script src="script.js"></script>
 	</body>
-
-
-  <footer class="bg-success fixed-bottom text-center text-light fw-bold fs-6 container-fluid position-fixed">&#169; YUMMI 2023 </footer>
-  <!-- FOOTER SECTION -->
-  <script src="nutritionalAnalysis.js"></script>
- 
-</body>
- 
 </html>
-
-<!-- &#169; -->
-<!-- This was at the end of the footer -->

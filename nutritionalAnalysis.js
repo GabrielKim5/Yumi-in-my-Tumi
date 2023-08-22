@@ -7,6 +7,8 @@ async function yumi(query) {
 		);
 		const data = await response.json();
 		console.dir(data[0]);
+		// console.dir(data[1]);
+
 
 		//THIS PRINTS THE DATA TO THE WEBPAGE
 		let template = `
